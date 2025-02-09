@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package proto;
+
+service MicroService {
+  rpc FindOne (MicroById) returns (Micro) {}
+}
+
+message MicroById {
+  int32 id = 1;
+}
+
+message Micro {
+  int32 id = 1;
+  string name = 2;
+}
