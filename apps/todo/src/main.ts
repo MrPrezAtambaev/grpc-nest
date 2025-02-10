@@ -1,16 +1,21 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { TodoModule } from './todo.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { join } from 'path';
+import { ReflectionService } from '@grpc/reflection';
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    AppModule,
+    TodoModule,
     {
       transport: Transport.GRPC,
       options: {
-        package: 'proto',
-        protoPath: join(__dirname, '../proto/micro.proto'),
+        url: '0.0.0.0:50051',
+        package: 'todo',
+        protoPath: join(process.cwd(), 'proto/todo.proto'),
+        onLoadPackageDefinition: (pkg, server) => {
+          new ReflectionService(pkg).addToServer(server);
+        },
       },
     },
   );

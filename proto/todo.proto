@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package todo;
+
+service TodoService {
+  rpc FindOne(FindOneHeroConditions) returns (Todo) {}
+  rpc FindAll(FindAllHeroConditions) returns (Todos) {}
+}
+
+message FindOneHeroConditions {
+  int32 id = 1;
+}
+
+message FindAllHeroConditions {}
+
+message Todo {
+  int32 id = 1;
+  string name = 2;
+  string type = 3;
+}
+
+message Todos {
+  repeated Todo todos = 1;
+}
+
