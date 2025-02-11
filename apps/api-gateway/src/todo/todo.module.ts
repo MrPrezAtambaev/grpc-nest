@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
-import { TODO_PACKAGE_NAME, TODO_SERVICE_NAME } from '@app/common/proto/todo';
+import { TODO_PACKAGE_NAME } from '@app/common/proto/todo';
 import { join } from 'path';
 import { TODO_SERVICE_CLIENT } from './todo.constants';
 import { TodoController } from './todo.controller';
